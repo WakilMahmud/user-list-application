@@ -4,9 +4,12 @@ import Title from "../../components/Title";
 import Badge from "../../components/Badge";
 import Progress from "../shared/Progress";
 import User from "./User";
+import Sorting from "../../components/Sorting";
+import Search from "../../components/Search";
 
 const Users = () => {
 	const [users, setUsers] = useState([]);
+	const [originalUsers, setOriginalUsers] = useState([]);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -18,6 +21,7 @@ const Users = () => {
 				const data = await res.json();
 
 				setUsers(data.users);
+				setOriginalUsers(data.users);
 			} catch (error) {
 				console.error("Error fetching users:", error.message);
 			}
@@ -30,13 +34,68 @@ const Users = () => {
 		};
 	}, []);
 
+	const handleUserSearch = (event) => {
+		const searchTerm = event.target.value.toLowerCase();
+		// console.log(value);
+
+		const filteredUsers = [...originalUsers].filter((user) => user.username.toLowerCase().includes(searchTerm));
+		// console.log(filteredUsers);
+
+		if (!searchTerm) setUsers(originalUsers);
+		else setUsers(filteredUsers);
+	};
+
+	const handleSort = (event) => {
+		let sortType = event.target.value;
+		// console.log(sortType);
+
+		if (sortType === "name") {
+			const sortedList = [...users].sort((a, b) => {
+				if (a.username < b.username) {
+					return -1;
+				} else if (a.username > b.username) {
+					return 1;
+				}
+				return 0;
+			});
+
+			setUsers(sortedList);
+		} else if (sortType === "email") {
+			const sortedList = [...users].sort((a, b) => {
+				if (a.email < b.email) {
+					return -1;
+				} else if (a.email > b.email) {
+					return 1;
+				}
+				return 0;
+			});
+			setUsers(sortedList);
+		} else if (sortType === "company") {
+			const sortedList = [...users].sort((a, b) => {
+				if (a.company.name < b.company.name) {
+					return -1;
+				} else if (a.company.name > b.company.name) {
+					return 1;
+				}
+				return 0;
+			});
+			setUsers(sortedList);
+		}
+	};
+
 	return (
 		<div className="w-5/6 mx-auto tablet:w-full tablet:px-4 laptop:max-w-7xl">
+			{/* Search User Name, Filter */}
+			<div className="flex justify-end mt-20">
+				<div className="max-w-sm flex gap-2 flex-col sm:flex-row ">
+					<Search handleUserSearch={handleUserSearch} users={users} />
+					<Sorting handleSort={handleSort} position="end" />
+				</div>
+			</div>
 			<div className="flex items-center gap-2 my-3">
 				<Title title="Users" />
 				<Badge length={users.length}></Badge>
 			</div>
-
 			{/* Users */}
 			{users.length ? (
 				<div className=" grid gap-4  grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3">
