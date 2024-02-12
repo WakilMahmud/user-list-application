@@ -8,7 +8,7 @@ const Search = ({ handleUserSearch, users }) => {
 				<input
 					type="search"
 					list="usernames"
-					className="w-full px-3 py-2 placeholder:text-slate-400  border border-slate-300 rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+					className="border w-full px-3 py-2 placeholder:text-slate-400   border-slate-300 rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
 					placeholder="Search user"
 					onChange={handleUserSearch}
 					onFocus={() => setShow(false)}

@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import Info from "../../components/Info";
 
 const SingleUser = () => {
 	let { state: user } = useLocation();
@@ -14,27 +15,12 @@ const SingleUser = () => {
 				</div>
 			</div>
 			<div className="w-full px-4 flex flex-col justify-center divide-y border rounded-md shadow-sm text-sm tablet:w-4/5">
-				<div className="flex gap-2 py-2">
-					<h1 className="w-2/5 tablet:w-1/5 font-bold">First Name</h1>
-					<p className="w-3/5 text-gray-500">{firstName}</p>
-				</div>
-				<div className="flex gap-2 py-2">
-					<h1 className="w-2/5 tablet:w-1/5 font-bold">Last Name</h1>
-					<p className="w-3/5 text-gray-500">{lastName}</p>
-				</div>
-				<div className="flex gap-2 py-2">
-					<h1 className="w-2/5 tablet:w-1/5 font-bold">User Name</h1>
-					<p className="w-3/5 text-gray-500 first-letter:uppercase">{username}</p>
-				</div>
+				<Info property="First Name" value={firstName}></Info>
+				<Info property="Last Name" value={lastName}></Info>
+				<Info property="User Name" value={username} classes="first-letter:uppercase"></Info>
+				<Info property="Email" value={email} classes="truncate"></Info>
+				<Info property="Company" value={company.name}></Info>
 
-				<div className="flex gap-2 py-2">
-					<h1 className="w-2/5 tablet:w-1/5 font-bold">Email</h1>
-					<p className="w-3/5 text-gray-500 truncate">{email}</p>
-				</div>
-				<div className="flex gap-2 py-2">
-					<h1 className="w-2/5 tablet:w-1/5 font-bold">Company</h1>
-					<p className="w-3/5 text-gray-500">{company.name}</p>
-				</div>
 				<div className="flex gap-2 py-2">
 					<h1 className="w-2/5 tablet:w-1/5 font-bold">Address</h1>
 					<p className="w-3/5  text-gray-500">

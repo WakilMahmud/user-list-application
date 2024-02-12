@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.my-custom-label-style {
+		@apply block text-sm font-medium text-gray-700;
+	}
+	.my-custom-input-style {
+		@apply border px-3 py-2 text-sm text-slate-500 mt-1 w-full rounded-md focus:outline-none focus:ring-1 focus:border-sky-500;
+	}
+	.my-custom-after-content {
+		@apply after:content-['*'] after:ml-0.5 after:text-red-500;
+	}
+}
