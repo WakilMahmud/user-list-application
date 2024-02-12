@@ -7,7 +7,7 @@ const User = ({ user }) => {
 	return (
 		<div className="flex flex-col  bg-slate-50 border rounded-lg shadow-md px-2 py-4 text-gray-500 tablet:gap-4 laptop:gap-2 laptop:flex-row laptop:items-center">
 			<div className="flex items-center justify-center rounded-lg">
-				<img src={image} alt="Avatar" className="rounded-lg  tablet:size-48 laptop:size-28" />
+				<img src={image} alt="Avatar" className="rounded-md tablet:size-48 laptop:size-28" />
 			</div>
 
 			<div className="w-full flex flex-col text-xs space-y-0.5  pl-4  tablet:text-sm laptop:pl-0 laptop:text-xs desktop:text-sm">

@@ -6,6 +6,7 @@ import Progress from "../shared/Progress";
 import User from "./User";
 import Sorting from "../../components/Sorting";
 import Search from "../../components/Search";
+import AddUser from "./AddUser";
 
 const Users = () => {
 	const [users, setUsers] = useState([]);
@@ -34,20 +35,8 @@ const Users = () => {
 		};
 	}, []);
 
-	const handleUserSearch = (event) => {
-		const searchTerm = event.target.value.toLowerCase();
-		// console.log(value);
-
-		const filteredUsers = [...originalUsers].filter((user) => user.username.toLowerCase().includes(searchTerm));
-		// console.log(filteredUsers);
-
-		if (!searchTerm) setUsers(originalUsers);
-		else setUsers(filteredUsers);
-	};
-
 	const handleSort = (event) => {
-		let sortType = event.target.value;
-		// console.log(sortType);
+		const sortType = event.target.value;
 
 		if (sortType === "name") {
 			const sortedList = [...users].sort((a, b) => {
@@ -83,6 +72,23 @@ const Users = () => {
 		}
 	};
 
+	const handleUserSearch = (event) => {
+		const searchTerm = event.target.value.toLowerCase();
+
+		const filteredUsers = [...originalUsers].filter((user) => user.username.toLowerCase().includes(searchTerm));
+
+		if (!searchTerm) setUsers(originalUsers);
+		else setUsers(filteredUsers);
+	};
+
+	const handleAddUser = (user) => {
+		// console.log(user);
+		user = { ...user, id: originalUsers.length + 1 };
+
+		setUsers((originalUsers) => [...originalUsers, user]);
+		setOriginalUsers((originalUsers) => [...originalUsers, { ...user, user }]);
+	};
+
 	return (
 		<div className="w-5/6 mx-auto tablet:w-full tablet:px-4 laptop:max-w-7xl">
 			{/* Search User Name, Filter */}
@@ -106,6 +112,12 @@ const Users = () => {
 			) : (
 				<Progress></Progress>
 			)}
+
+			{/* Add user */}
+			<div className="my-20 space-y-8">
+				<Title title="Add User" position="center" />
+				<AddUser handleAddUser={handleAddUser}></AddUser>
+			</div>
 		</div>
 	);
 };
