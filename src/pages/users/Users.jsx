@@ -7,6 +7,7 @@ import User from "./User";
 import Sorting from "../../components/Sorting";
 import Search from "../../components/Search";
 import AddUser from "./AddUser";
+import toast from "react-hot-toast";
 
 const Users = () => {
 	const [users, setUsers] = useState([]);
@@ -87,6 +88,7 @@ const Users = () => {
 
 		setUsers((originalUsers) => [...originalUsers, user]);
 		setOriginalUsers((originalUsers) => [...originalUsers, { ...user, user }]);
+		toast.success("Successfully added!");
 	};
 
 	return (
