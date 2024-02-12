@@ -1,6 +1,5 @@
 export function sortBy(users, filter) {
 	if (filter.includes("company")) {
-		console.log("Inside Filter: " + filter);
 		const sortedUsers = [...users].sort((a, b) => {
 			if (a.company.name < b.company.name) {
 				return -1;

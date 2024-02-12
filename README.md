@@ -39,4 +39,4 @@ The application allows users to view, search, sort, and add users.
 - Step-2: Install the required Node.js packages using npm: <code>npm install</code>
 - Step-3: Run the application: <code>npm run dev</code>
 
-### Live Link: https://user-list-app-wakil.netlify.app/
+### Live Link: https://user-list-app-wakil.netlify.app

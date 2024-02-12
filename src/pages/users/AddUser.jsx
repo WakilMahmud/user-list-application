@@ -73,15 +73,20 @@ const AddUser = ({ handleAddUser }) => {
 			<InputBox htmlFor="street" type="text" label="Street" labelClasses="my-custom-after-content" required={true}></InputBox>
 			<InputBox htmlFor="suite" type="text" label="Suite"></InputBox>
 			<InputBox htmlFor="city" type="text" label="City" labelClasses="my-custom-after-content" required={true}></InputBox>
-			<InputBox
-				htmlFor="image"
-				type="file"
-				label="Avatar"
-				labelClasses="my-custom-after-content"
-				inputClasses="block text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-sky-600 hover:file:bg-violet-100"
-				required={true}
-			></InputBox>
 
+			<div className="mb-4">
+				<label htmlFor="image" className="my-custom-label-style my-custom-after-content">
+					Avatar
+				</label>
+				<input
+					type="file"
+					id="image"
+					name="image"
+					accept="image/*"
+					className="my-custom-input-style block text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-sky-600 hover:file:bg-violet-100"
+					required
+				/>
+			</div>
 			<div className="flex justify-end">
 				<button
 					type="submit"
