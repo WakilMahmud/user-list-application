@@ -22,7 +22,7 @@ const User = ({ user }) => {
 
 				<div className="flex items-center gap-2">
 					<HiMail className="text-black" />
-					<span>{email}</span>
+					<span className="truncate">{email}</span>
 				</div>
 
 				<div className="flex items-center gap-2">
@@ -30,7 +30,7 @@ const User = ({ user }) => {
 					<span>{company.name}</span>
 				</div>
 
-				<div className="flex items-center gap-2  ">
+				<div className="flex items-center gap-2">
 					<HiLocationMarker className="text-black" />
 					<address>
 						<span>

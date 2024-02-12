@@ -1,4 +1,5 @@
 import { IMGBB_API } from "../../api/api";
+import toast from "react-hot-toast";
 
 const AddUser = ({ handleAddUser }) => {
 	const handleSubmit = async (e) => {
@@ -10,54 +11,56 @@ const AddUser = ({ handleAddUser }) => {
 		const data = new FormData();
 		data.append("image", photo);
 
-		// console.log(e.target.image.files[0]);
+		try {
+			const res = await fetch(`${IMGBB_API}?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
+				method: "POST",
+				body: data,
+			});
+			const imageData = await res.json();
+			// console.log(imageData.data.url);
+			const image = imageData.data.url;
+			const firstName = e.target.firstName.value;
+			const lastName = e.target.lastName.value;
+			const username = firstName + " " + lastName;
+			const email = e.target.email.value;
+			const company = e.target.company.value;
+			const street = e.target.street.value;
+			const suite = e.target.suite.value;
+			const city = e.target.city.value;
 
-		const res = await fetch(`${IMGBB_API}?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
-			method: "POST",
-			body: data,
-		});
-		const imageData = await res.json();
-		// console.log(imageData.data.url);
+			// console.log({ firstName }, { lastName }, { username }, { email }, { company }, { street }, { city }, { suite }, { image });
 
-		const image = imageData.data.url;
+			const newUser = {
+				firstName,
+				lastName,
+				username: username.toLowerCase(),
+				email,
+				company: {
+					name: company,
+				},
+				address: {
+					address: street,
+					city,
+					suite,
+				},
+				image,
+			};
 
-		const firstName = e.target.firstName.value;
-		const lastName = e.target.lastName.value;
-		const username = firstName + " " + lastName;
-		const email = e.target.email.value;
-		const company = e.target.company.value;
-		const street = e.target.street.value;
-		const suite = e.target.suite.value;
-		const city = e.target.city.value;
+			handleAddUser(newUser);
 
-		// console.log({ firstName }, { lastName }, { username }, { email }, { company }, { street }, { city }, { suite }, { image });
+			e.target.firstName.value = "";
+			e.target.lastName.value = "";
+			e.target.email.value = "";
+			e.target.company.value = "";
+			e.target.street.value = "";
+			e.target.suite.value = "";
+			e.target.city.value = "";
+			e.target.image.value = "";
 
-		const newUser = {
-			firstName,
-			lastName,
-			username: username.toLowerCase(),
-			email,
-			company: {
-				name: company,
-			},
-			address: {
-				address: street,
-				city,
-				suite,
-			},
-			image,
-		};
-
-		handleAddUser(newUser);
-
-		e.target.firstName.value = "";
-		e.target.lastName.value = "";
-		e.target.email.value = "";
-		e.target.company.value = "";
-		e.target.street.value = "";
-		e.target.suite.value = "";
-		e.target.city.value = "";
-		e.target.image.value = "";
+			toast.success("Successfully added!");
+		} catch (error) {
+			toast.error(error.message);
+		}
 	};
 
 	return (

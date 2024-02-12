@@ -7,7 +7,6 @@ import User from "./User";
 import Sorting from "../../components/Sorting";
 import Search from "../../components/Search";
 import AddUser from "./AddUser";
-import toast from "react-hot-toast";
 
 const Users = () => {
 	const [users, setUsers] = useState([]);
@@ -76,7 +75,7 @@ const Users = () => {
 	const handleUserSearch = (event) => {
 		const searchTerm = event.target.value.toLowerCase();
 
-		const filteredUsers = [...originalUsers].filter((user) => user.username.toLowerCase().includes(searchTerm));
+		const filteredUsers = [...originalUsers].filter((user) => user.username.includes(searchTerm));
 
 		if (!searchTerm) setUsers(originalUsers);
 		else setUsers(filteredUsers);
@@ -88,7 +87,6 @@ const Users = () => {
 
 		setUsers((originalUsers) => [...originalUsers, user]);
 		setOriginalUsers((originalUsers) => [...originalUsers, { ...user, user }]);
-		toast.success("Successfully added!");
 	};
 
 	return (
